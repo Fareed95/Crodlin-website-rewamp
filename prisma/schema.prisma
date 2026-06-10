@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Blog {
+  id              BigInt    @id @default(autoincrement())
+  publishedAt     DateTime? @map("published_at") @db.Timestamptz
+  uploadedBy      BigInt?   @map("uploaded_by")
+  featured        Boolean   @default(false)
+  isBlog          Boolean   @default(true) @map("is_blog")
+  image           String?
+  slug            String?   @unique
+  metaTitle       String?   @map("meta_title")
+  title           String?
+  paragraph       String?
+  metaDescription String?   @map("meta_description")
+
+  @@map("Blog")
+}
+
+model Inquiry {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  projectType String?  @map("project_type")
+  budget      String?
+  message     String
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("Inquiry")
+}
