@@ -68,7 +68,7 @@ export function HeroSection() {
 
                 <div className="mt-4 space-y-2 font-mono text-sm text-gray-300">
                   <p className="text-gray-500">
-                    {"// Initialize Crodlin Technology"}
+                    {'// Initialize Crodlin Technology'}
                   </p>
                   <p>
                     <span className="text-ember">const</span>{' '}
@@ -82,21 +82,30 @@ export function HeroSection() {
                     ,
                   </p>
                   <p className="pl-4">
-                    scope: [<span className="text-green-400">&quot;Frontend&quot;</span>,{' '}
+                    scope: [
+                    <span className="text-green-400">&quot;Frontend&quot;</span>
+                    ,{' '}
                     <span className="text-green-400">&quot;Backend&quot;</span>,{' '}
-                    <span className="text-green-400">&quot;AI Integration&quot;</span>],
+                    <span className="text-green-400">
+                      &quot;AI Integration&quot;
+                    </span>
+                    ],
                   </p>
                   <p className="pl-4">
-                    velocity: <span className="text-yellow-400">&quot;Maximum&quot;</span>
+                    velocity:{' '}
+                    <span className="text-yellow-400">&quot;Maximum&quot;</span>
                     ,
                   </p>
                   <p className="pl-4">
                     deployment:{' '}
-                    <span className="text-yellow-400">&quot;AWS/Supabase&quot;</span>,
+                    <span className="text-yellow-400">
+                      &quot;AWS/Supabase&quot;
+                    </span>
+                    ,
                   </p>
                   <p>{'}'}</p>
                   <br />
-                  <p className="text-gray-500">{"// Run build pipeline"}</p>
+                  <p className="text-gray-500">{'// Run build pipeline'}</p>
                   <p>
                     <span className="text-purple-400">await</span>{' '}
                     buildSuccess(project)
