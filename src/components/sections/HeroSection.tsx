@@ -1,121 +1,81 @@
-import React from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { ArrowRight, Star } from 'lucide-react'
+import React from 'react';
+import Link from 'next/link';
 
-export function HeroSection() {
+export default function HeroSection() {
   return (
-    <section className="bg-surface-dark relative overflow-hidden py-24 text-white sm:py-32">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(216,90,48,0.15),transparent_45%)]" />
-      <div className="bg-ember/5 absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full blur-3xl" />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="lg:grid lg:grid-cols-12 lg:items-center lg:gap-8">
-          {/* Text Content */}
-          <div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:text-left">
-            {/* Trust badge */}
-            <div className="inline-flex items-center space-x-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-gray-300 backdrop-blur-sm">
-              <Star className="fill-ember text-ember h-4 w-4" />
-              <span>Trusted Software Partners</span>
-            </div>
-
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              We build software{' '}
-              <span className="from-ember to-ember-dark bg-gradient-to-r bg-clip-text text-transparent">
-                that scales
-              </span>
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-gray-300">
-              End-to-end custom product engineering, software development, and
-              IT consultancy. We turn ambitious visions into robust digital
-              realities for startups and enterprises.
-            </p>
-
-            {/* CTAs */}
-            <div className="mt-10 gap-4 sm:flex sm:justify-center lg:justify-start">
-              <Link href="/contact">
-                <Button className="bg-ember hover:bg-ember-dark shadow-ember/25 w-full rounded-md px-8 py-6 text-base font-semibold text-white shadow-lg transition-all duration-300 sm:w-auto">
-                  Get a Free Consultation
-                </Button>
-              </Link>
-              <Link href="/work">
-                <Button
-                  variant="outline"
-                  className="w-full rounded-md border-white/20 px-8 py-6 text-base font-semibold transition-all duration-300 hover:bg-white/10 hover:text-white sm:w-auto"
-                >
-                  View Our Work <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
+    <section className="bg-[#0D0D0D] pt-32 pb-0 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start">
+        
+        {/* Left Column */}
+        <div className="flex flex-col items-start z-10 pt-8 lg:pt-12">
+          <div className="inline-block border border-[#D85A30]/50 text-[#D85A30] bg-[#D85A30]/5 backdrop-blur-sm text-[10px] md:text-xs uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full mb-6">
+            SOFTWARE · AI · MOBILE
           </div>
+          
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight">
+            We build software<br />
+            that <span className="text-[#D85A30]">scales</span> your<br />
+            business.
+          </h1>
+          
+          <p className="text-[#A0A0A0] text-sm md:text-base max-w-md mt-6 leading-relaxed font-light">
+            From MVPs to enterprise systems — we design, build, and ship software that moves fast and lasts long.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center gap-6 mt-10 w-full sm:w-auto">
+            <Link 
+              href="#contact" 
+              className="bg-[#D85A30] hover:bg-[#A03D1A] text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold transition-colors w-full sm:w-auto text-center text-sm md:text-base"
+            >
+              Get a free consultation
+            </Link>
+            <Link 
+              href="#work" 
+              className="text-white hover:text-[#D85A30] group flex items-center justify-center gap-2 font-medium transition-colors text-sm md:text-base w-full sm:w-auto"
+            >
+              See our work 
+              <span className="group-hover:translate-y-1 transition-transform">↓</span>
+            </Link>
+          </div>
+        </div>
 
-          {/* Visual Element / Graphic */}
-          <div className="mt-16 sm:mt-24 lg:col-span-6 lg:mt-0">
-            <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-              {/* Glassmorphic card */}
-              <div className="relative rounded-2xl border border-white/15 bg-white/5 p-6 shadow-2xl backdrop-blur-md">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div className="flex space-x-2">
-                    <div className="h-3 w-3 rounded-full bg-red-500/80" />
-                    <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
-                    <div className="h-3 w-3 rounded-full bg-green-500/80" />
-                  </div>
-                  <span className="font-mono text-xs text-gray-400">
-                    crodlin.config.ts
-                  </span>
-                </div>
-
-                <div className="mt-4 space-y-2 font-mono text-sm text-gray-300">
-                  <p className="text-gray-500">
-                    {'// Initialize Crodlin Technology'}
-                  </p>
-                  <p>
-                    <span className="text-ember">const</span>{' '}
-                    <span className="text-blue-400">project</span> = {'{'}
-                  </p>
-                  <p className="pl-4">
-                    client:{' '}
-                    <span className="text-green-400">
-                      &quot;Your Startup / Enterprise&quot;
-                    </span>
-                    ,
-                  </p>
-                  <p className="pl-4">
-                    scope: [
-                    <span className="text-green-400">&quot;Frontend&quot;</span>
-                    ,{' '}
-                    <span className="text-green-400">&quot;Backend&quot;</span>,{' '}
-                    <span className="text-green-400">
-                      &quot;AI Integration&quot;
-                    </span>
-                    ],
-                  </p>
-                  <p className="pl-4">
-                    velocity:{' '}
-                    <span className="text-yellow-400">&quot;Maximum&quot;</span>
-                    ,
-                  </p>
-                  <p className="pl-4">
-                    deployment:{' '}
-                    <span className="text-yellow-400">
-                      &quot;AWS/Supabase&quot;
-                    </span>
-                    ,
-                  </p>
-                  <p>{'}'}</p>
-                  <br />
-                  <p className="text-gray-500">{'// Run build pipeline'}</p>
-                  <p>
-                    <span className="text-purple-400">await</span>{' '}
-                    buildSuccess(project)
-                  </p>
-                </div>
-              </div>
+        {/* Right Column (Video) */}
+        <div className="relative w-full aspect-[4/3] lg:aspect-[4/5] xl:aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-[#D85A30]/30 shadow-2xl shadow-[#D85A30]/5 z-10 self-center lg:mt-8 group">
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline 
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+          >
+            <source src="/Hero_section.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/20 to-transparent opacity-90 pointer-events-none"></div>
+          
+          {/* Floating badge over video */}
+          <div className="absolute bottom-6 left-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-center gap-4 animate-[bounce_5s_infinite_alternate]">
+            <div className="w-10 h-10 rounded-full bg-[#D85A30] flex items-center justify-center text-white font-bold">
+              10x
+            </div>
+            <div>
+              <p className="text-white text-sm font-semibold">Faster Delivery</p>
+              <p className="text-white/60 text-xs">Than traditional agencies</p>
             </div>
           </div>
         </div>
+        
+      </div>
+
+      {/* Marquee Ticker */}
+      <div className="w-full overflow-hidden bg-[#D85A30] h-[40px] flex items-center mt-24">
+        <div className="whitespace-nowrap flex font-mono text-sm text-white animate-marquee">
+          <span className="mx-4">NEXT.JS · REACT NATIVE · DJANGO · AI/ML · POSTGRESQL · SUPABASE · TAILWIND · FIGMA · AWS ·</span>
+          <span className="mx-4">NEXT.JS · REACT NATIVE · DJANGO · AI/ML · POSTGRESQL · SUPABASE · TAILWIND · FIGMA · AWS ·</span>
+          <span className="mx-4">NEXT.JS · REACT NATIVE · DJANGO · AI/ML · POSTGRESQL · SUPABASE · TAILWIND · FIGMA · AWS ·</span>
+          <span className="mx-4">NEXT.JS · REACT NATIVE · DJANGO · AI/ML · POSTGRESQL · SUPABASE · TAILWIND · FIGMA · AWS ·</span>
+          <span className="mx-4">NEXT.JS · REACT NATIVE · DJANGO · AI/ML · POSTGRESQL · SUPABASE · TAILWIND · FIGMA · AWS ·</span>
+        </div>
       </div>
     </section>
-  )
+  );
 }

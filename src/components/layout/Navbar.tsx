@@ -1,102 +1,93 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
-import { NAV_LINKS } from '@/lib/constants'
-import { Button } from '@/components/ui/button'
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Menu } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 
-export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const pathname = usePathname()
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
-      <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="from-ember to-ember-dark bg-gradient-to-r bg-clip-text text-xl font-bold tracking-tight text-transparent">
-              Crodlin Technology
-            </span>
-          </Link>
-        </div>
+        <Link href="/" className="flex items-center gap-2 group">
+          <Image 
+            src="/logo_without_name-removebg-preview.png" 
+            alt="Crodlin Logo" 
+            width={32} 
+            height={32} 
+            className={`object-contain group-hover:scale-105 transition-transform ${!scrolled ? 'brightness-0 invert' : ''}`}
+          />
+          <span className={`text-lg md:text-xl font-bold tracking-tight ${!scrolled ? 'text-white' : 'text-[#0D0D0D]'}`}>Crodlin</span>
+        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center space-x-8 md:flex">
-          {NAV_LINKS.map((link) => {
-            const isActive = pathname === link.href
-            return (
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-8">
+          <div className="flex gap-6">
+            {['Services', 'Work', 'Blog', 'About'].map((item) => (
               <Link
-                key={link.href}
-                href={link.href}
-                className={`hover:text-ember text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'text-ember font-semibold'
-                    : 'text-muted-foreground'
-                }`}
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className={`text-sm font-medium transition-colors ${!scrolled ? 'text-white/80 hover:text-white' : 'text-[#5A5A5A] hover:text-[#0D0D0D]'}`}
               >
-                {link.label}
+                {item}
               </Link>
-            )
-          })}
-        </nav>
-
-        {/* CTA Button */}
-        <div className="hidden items-center space-x-4 md:flex">
-          <Link href="/contact">
-            <Button className="bg-ember hover:bg-ember-dark text-white shadow-sm transition-all duration-300">
-              Get a Free Consultation
-            </Button>
+            ))}
+          </div>
+          <Link
+            href="#contact"
+            className="border border-[#D85A30] text-[#D85A30] hover:bg-[#D85A30] hover:text-white px-5 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-1"
+          >
+            Book a call <span>↗</span>
           </Link>
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex md:hidden">
-          <button
-            type="button"
-            className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex items-center justify-center rounded-md p-2 focus:outline-none"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+        {/* Mobile Nav */}
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className={`${!scrolled ? 'text-white' : 'text-[#0D0D0D]'} p-2`}>
+                <Menu className="w-6 h-6" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-white flex flex-col gap-8 pt-16 border-l-0">
+              <SheetTitle className="sr-only">Menu</SheetTitle>
+              <div className="flex flex-col gap-6 text-center">
+                {['Services', 'Work', 'Blog', 'About'].map((item) => (
+                  <Link
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    className="text-xl font-semibold text-[#0D0D0D] hover:text-[#D85A30] transition-colors"
+                  >
+                    {item}
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="#contact"
+                className="border border-[#D85A30] bg-[#D85A30] text-white px-5 py-3 rounded-full text-center text-sm font-semibold mx-auto w-full max-w-[200px]"
+              >
+                Book a call ↗
+              </Link>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="border-border bg-background animate-in slide-in-from-top-5 border-b px-4 pt-2 pb-6 shadow-lg duration-200 md:hidden">
-          <div className="space-y-3">
-            {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`hover:bg-muted hover:text-ember block rounded-md px-3 py-2 text-base font-medium transition-colors ${
-                    isActive ? 'text-ember bg-muted' : 'text-muted-foreground'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            })}
-            <div className="border-border border-t pt-4">
-              <Link
-                href="/contact"
-                onClick={() => setIsOpen(false)}
-                className="block w-full"
-              >
-                <Button className="bg-ember hover:bg-ember-dark w-full text-white">
-                  Get a Free Consultation
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-    </header>
-  )
+    </nav>
+  );
 }
